@@ -43,7 +43,7 @@ ssize_t read_input(char **buffer, size_t *size)
 void execute_command(TokenList *tokens)
 {
 	int i;
-	
+
 	pid_t pid = fork();
 
 	if (pid == -1)
@@ -122,6 +122,9 @@ int main(void)
 		}
 		input_buffer[strcspn(input_buffer, "\n")] = '\0';
 		run_command(input_buffer);
+
+		free(input_buffer);
+		input_buffer = NULL;
 	}
 	free(input_buffer);
 

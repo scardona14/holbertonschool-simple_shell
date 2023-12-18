@@ -30,6 +30,7 @@ TokenList tokenize_input(char *input)
 		tokens.tokens[tokens.size - 1] = strdup(token);
 		token = strtok(NULL, " \t\n");
 	}
+	free(token);
 	return (tokens);
 }
 
@@ -46,4 +47,7 @@ void free_token_list(TokenList *tokens)
 		free(tokens->tokens[i]);
 	}
 	free(tokens->tokens);
+
+	tokens->tokens = NULL;
+	tokens->size = 0;
 }
