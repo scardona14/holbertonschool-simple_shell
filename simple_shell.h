@@ -13,17 +13,13 @@
 
 #define MAX_INPUT_SIZE 1024
 
-typedef struct
-{
-char **tokens;
-size_t size;
-} TokenList;
+extern char **environ;
 
-void display_prompt(void);
-ssize_t read_input(char **buffer, size_t *size);
-TokenList tokenize_input(char *input);
-void free_token_list(TokenList *tokens);
-void execute_command(TokenList *tokens);
-void run_command(char *command);
+
+int _printenv(void);
+char *_getenv(char *var);
+char *command_lists(char *cmd);
+int command_read(char *s, size_t __attribute__((unused))file_stream);
+int execute(char *cmd_arr[]);
 
 #endif /* SIMPLE_SHELL_H */
