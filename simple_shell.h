@@ -13,10 +13,10 @@
 
 #define MAX_INPUT_SIZE 1024
 
-typedef struct 
+typedef struct
 {
-    char **tokens;
-    size_t size;
+char **tokens;
+size_t size;
 } TokenList;
 
 void display_prompt(void);
