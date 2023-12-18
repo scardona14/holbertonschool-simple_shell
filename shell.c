@@ -72,9 +72,9 @@ void execute_command(TokenList *tokens)
 
 		waitpid(pid, &status, 0);
 		if (WIFEXITED(status))
-			printf("Child process exited with status %d", WEXITSTATUS(status));
+			printf("Child process exited with status %d\n", WEXITSTATUS(status));
 		else
-			printf("child process did not exit normally");
+			printf("child process did not exit normally\n");
 	}
 }
 
