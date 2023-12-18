@@ -5,7 +5,8 @@
  */
 void display_prompt(void)
 {
-	printf("simple_shell>");
+	if (isatty(fileno(stdin)))
+		printf("simple_shell>");
 	fflush(stdout);
 }
 
