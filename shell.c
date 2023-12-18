@@ -42,6 +42,8 @@ ssize_t read_input(char **buffer, size_t *size)
  */
 void execute_command(TokenList *tokens)
 {
+	int i;
+	
 	pid_t pid = fork();
 
 	if (pid == -1)
@@ -59,6 +61,15 @@ void execute_command(TokenList *tokens)
 			perror("stat");
 			_exit(EXIT_FAILURE);
 		}
+
+
+		for (i = 0; tokens->tokens[i] != NULL; i++)
+		{
+			if(i > 0)
+				printf(" ");
+			printf("%s", tokens->tokens[i]);
+		}
+		printf("\n");
 
 		if (execve(tokens->tokens[0], tokens->tokens, NULL) == -1)
 		{
