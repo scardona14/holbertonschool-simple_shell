@@ -115,7 +115,7 @@ int execute(char *cmd_arr[])
 	char *exe_path = NULL, *cmd = NULL;
 	pid_t pid;
 	int status, exit_st = 0;
-
+	
 	cmd = cmd_arr[0];
 	exe_path = command_lists(cmd);
 	if (exe_path == NULL)
@@ -150,4 +150,3 @@ int execute(char *cmd_arr[])
 	free(exe_path);
 	return (0);
 }
-
