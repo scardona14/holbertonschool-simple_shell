@@ -13,7 +13,7 @@
 
 #define MAX_INPUT_SIZE 100
 
-extern char **environ;S
+extern char **environ;
 
 
 int _printenv(void);
