@@ -11,9 +11,9 @@
 #include <fcntl.h>
 #include <dirent.h>
 
-#define MAX_INPUT_SIZE 1024
+#define MAX_INPUT_SIZE 100
 
-extern char **environ;
+extern char **environ;S
 
 
 int _printenv(void);
