@@ -1,5 +1,4 @@
 #include "simple_shell.h"
-
 /**
  * command_lists - function that looks for the command path
  * @cmd: command
