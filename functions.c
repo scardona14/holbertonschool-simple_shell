@@ -5,7 +5,7 @@ int last_exit_status = 0;
 /**
  * command_lists - function that looks for the command path
  * @cmd: command
- * Return: the path
+ * Return: the paths
  */
 char *command_lists(char *cmd)
 {
