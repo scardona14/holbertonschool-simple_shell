@@ -15,7 +15,7 @@
 
 extern char **environ;
 
-
+char *get_env_variable(const char *name);
 int _printenv(void);
 char *_getenv(char *var);
 char *command_lists(char *cmd);
