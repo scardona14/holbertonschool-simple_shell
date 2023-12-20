@@ -1,4 +1,7 @@
 #include "simple_shell.h"
+
+int last_exit_status = 0;
+
 /**
  * command_lists - function that looks for the command path
  * @cmd: command
@@ -82,12 +85,11 @@ int command_read(char *input, size_t __attribute__((unused))characters)
 	input = trim_spaces(input);
 
 	if (strcmp(input, "") == 0)
-		return (_printenv());
-		
+		return (0);
+
 	if (strcmp(input, "exit") == 0)
 	{
-		write(1, "\n✯ exiting terminal ✯\n\n", 27);
-		return (2);
+		exit(last_exit_status);
 	}
 	if (strcmp(input, "env") == 0)
 		return (_printenv());
@@ -156,6 +158,9 @@ int execute(char *cmd_arr[])
 			}
 		}
 	}
+	if (WIFEXITED(status))
+		last_exit_status = WEXITSTATUS(status);
+
 	free(exe_path);
 	return (0);
 }
