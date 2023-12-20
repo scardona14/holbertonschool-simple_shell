@@ -15,7 +15,7 @@ char *command_lists(char *cmd)
 	path = strdup(get_env_variable("PATH")); /* gets a dup of PATH */
 	tokens = strtok(path, ":"); /* split the path in a set of tokens */
 	new_path = malloc(sizeof(char) * 100);
-	if (get_env_variable("PATH")[0] == ':')
+	if (getenv("PATH")[0] == ':')
 		if (stat(cmd, &buf) == 0) /* in case of success */
 			return (strdup(cmd)); /* return a copy of command */
 
@@ -62,8 +62,7 @@ int _printenv(void)
 	{
 		write(file_descr, str, strlen(str));
 		write(file_descr, "\n", 1);
-		str = environ[index]; /*++i without next line */
-		++index;
+		str = environ[++index]; 
 	}
 	return (0);
 }
@@ -90,7 +89,6 @@ int command_read(char *input, size_t __attribute__((unused))characters)
 
 	if (input[0] == 32)
 	{
-		input = NULL;
 		return (1);
 	}
 	token = strtok(input, " ");
@@ -132,18 +130,27 @@ int execute(char *cmd_arr[])
 		return (-1);
 	}
 	if (pid > 0)
+	{
 		wait(&status);
+		exit_st = WEXITSTATUS(status);
+	}
 	else if (pid == 0)
 	{
 		if (environ)
 		{
-			(execve(exe_path, cmd_arr, environ));
-			perror("Error:");
-			exit(1);
+			if (execve(exe_path, cmd_arr, environ) == -1)
+			{
+				perror("Error:");
+				exit(1);
+			}
 		}
 		else
 		{
-			execve(exe_path, cmd_arr, NULL);
+			if(execve(exe_path, cmd_arr, NULL) == -1)
+			{
+				perror("Error:");
+				exit(1);
+			}
 		}
 	}
 	free(exe_path);
@@ -169,7 +176,6 @@ char *get_env_variable(const char *name)
 		}
 		index++;
 	}
-free(env_var);
+
 	return (env_var);
 }
-
