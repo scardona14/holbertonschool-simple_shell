@@ -5,7 +5,7 @@ int last_exit_status = 0;
 /**
  * command_lists - function that looks for the command path
  * @cmd: command
- * Return: the path
+ * Return: the paths
  */
 char *command_lists(char *cmd)
 {
@@ -90,10 +90,6 @@ int command_read(char *input, size_t __attribute__((unused))characters)
 	if (strcmp(input, "exit") == 0)
 	{
 		exit(last_exit_status);
-	}
-	else
-	{
-		exit(atoi(cmd_arr[1]));
 	}
 	if (strcmp(input, "env") == 0)
 		return (_printenv());
