@@ -80,7 +80,10 @@ int command_read(char *input, size_t __attribute__((unused))characters)
 	int index = 0;
 
 	input = trim_spaces(input);
-	
+
+	if (strcmp(input, "") == 0)
+		return (_printenv());
+		
 	if (strcmp(input, "exit") == 0)
 	{
 		write(1, "\n✯ exiting terminal ✯\n\n", 27);
