@@ -15,7 +15,7 @@ char *command_lists(char *cmd)
 	path = strdup(get_env_variable("PATH")); /* gets a dup of PATH */
 	tokens = strtok(path, ":"); /* split the path in a set of tokens */
 	new_path = malloc(sizeof(char) * 100);
-	if (get_env_variable("PATH")[0] == ':')
+	if (getenv("PATH")[0] == ':')
 		if (stat(cmd, &buf) == 0) /* in case of success */
 			return (strdup(cmd)); /* return a copy of command */
 
@@ -169,7 +169,6 @@ char *get_env_variable(const char *name)
 		}
 		index++;
 	}
-free(env_var);
+
 	return (env_var);
 }
-
