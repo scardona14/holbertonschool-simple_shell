@@ -79,6 +79,8 @@ int command_read(char *input, size_t __attribute__((unused))characters)
 	char *cmd_arr[100];
 	int index = 0;
 
+	input = trim_spaces(input);
+	
 	if (strcmp(input, "exit") == 0)
 	{
 		write(1, "\n✯ exiting terminal ✯\n\n", 27);
@@ -111,17 +113,16 @@ int execute(char *cmd_arr[])
 {
 	char *exe_path = NULL, *cmd = NULL;
 	pid_t pid;
-	int status, exit_st = 0;
+	int status;
 	
 	cmd = cmd_arr[0];
 	exe_path = command_lists(cmd);
-	if (exe_path == NULL)
+	if ((exe_path == NULL) || access(exe_path, X_OK) == -1)
 	{
 		write(2, cmd, strlen(cmd));
 		write(2, ": command not found\n", 21);
 
-		exit_st = WEXITSTATUS(status);
-		return (exit_st);
+		return (1);
 	}
 	pid = fork();
 	if (pid < 0)
@@ -132,7 +133,6 @@ int execute(char *cmd_arr[])
 	if (pid > 0)
 	{
 		wait(&status);
-		exit_st = WEXITSTATUS(status);
 	}
 	else if (pid == 0)
 	{
