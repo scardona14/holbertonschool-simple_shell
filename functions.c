@@ -12,7 +12,7 @@ char *command_lists(char *cmd)
 	char *new_path = NULL;
 	struct stat buf;
 
-	path = strdup(getenv("PATH")); /* gets a dup of PATH */
+	path = strdup(get_env_variable("PATH")); /* gets a dup of PATH */
 	tokens = strtok(path, ":"); /* split the path in a set of tokens */
 	new_path = malloc(sizeof(char) * 100);
 	if (getenv("PATH")[0] == ':')
@@ -82,7 +82,7 @@ int command_read(char *input, size_t __attribute__((unused))characters)
 
 	if (strcmp(input, "exit") == 0)
 	{
-		write(1, "\n Bye and thank you for the use \n\n", 35);
+		write(1, "\n✯ exiting terminal ✯\n\n", 27);
 		return (2);
 	}
 	if (strcmp(input, "env") == 0)
@@ -148,4 +148,27 @@ int execute(char *cmd_arr[])
 	}
 	free(exe_path);
 	return (0);
+}
+
+char *get_env_variable(const char *name)
+{
+	extern char **environ;
+	int index = 0;
+	char *env_var = NULL;
+
+	while (environ[index] != NULL)
+	{
+		if (strncmp(environ[index], name, strlen(name)) == 0)
+		{
+			env_var = strchr(environ[index], '=');
+			if (env_var != NULL)
+			{
+				env_var++;
+				break;
+			}
+		}
+		index++;
+	}
+
+	return env_var;
 }
