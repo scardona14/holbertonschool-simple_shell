@@ -62,8 +62,7 @@ int _printenv(void)
 	{
 		write(file_descr, str, strlen(str));
 		write(file_descr, "\n", 1);
-		str = environ[index]; /*++i without next line */
-		++index;
+		str = environ[++index]; 
 	}
 	return (0);
 }
@@ -90,7 +89,6 @@ int command_read(char *input, size_t __attribute__((unused))characters)
 
 	if (input[0] == 32)
 	{
-		input = NULL;
 		return (1);
 	}
 	token = strtok(input, " ");
@@ -132,18 +130,27 @@ int execute(char *cmd_arr[])
 		return (-1);
 	}
 	if (pid > 0)
+	{
 		wait(&status);
+		exit_st = WEXITSTATUS(status);
+	}
 	else if (pid == 0)
 	{
 		if (environ)
 		{
-			(execve(exe_path, cmd_arr, environ));
-			perror("Error:");
-			exit(1);
+			if (execve(exe_path, cmd_arr, environ) == -1)
+			{
+				perror("Error:");
+				exit(1);
+			}
 		}
 		else
 		{
-			execve(exe_path, cmd_arr, NULL);
+			if(execve(exe_path, cmd_arr, NULL) == -1)
+			{
+				perror("Error:");
+				exit(1);
+			}
 		}
 	}
 	free(exe_path);
