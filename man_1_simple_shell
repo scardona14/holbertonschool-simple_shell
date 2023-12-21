@@ -1,0 +1,78 @@
+.TH SIMPLE_SHELL 1 "December 22 2023" "Version 1.0" "Holberton Simple Shell Manual"
+
+.SH NAME
+simple_shell \- a simple shell implementation
+hsh - Holberton Simple Shell: command line interpreter
+
+.SH SYNOPSIS
+.B simple_shell
+[\fIOPTION\fR]...
+
+.SH DESCRIPTION
+\fBsimple_shell\fR is a simple shell program that provides basic command-line
+interpreter functionality.
+
+.PP
+\fBsimple_shell\fR reads user commands, interprets them, and executes the
+corresponding programs.
+
+.SH OPTIONS
+.TP
+.B \-h, \-\-help
+Display this help message and exit.
+
+.TP
+.B \-v, \-\-version
+Display the version information.
+
+.SH COMMANDS
+.PP
+\fBsimple_shell\fR supports the following commands:
+
+.TP
+.B exit
+Exit the shell.
+
+.TP
+.B env
+Display all the variables in the environment.
+
+.TP
+.B \fIcommand\fR
+Execute the specified command.
+
+.SH ENVIRONMENT VARIABLES
+.PP
+The following environment variables are used:
+
+.TP
+.B PATH
+The colon-separated list of directories to search for executable programs.
+
+.SH EXIT STATUS
+.PP
+.B simple_shell
+returns a zero exit status on success, and non-zero on failure.
+
+.SH EXAMPLES
+.PP
+To execute a command:
+.BR simple_shell " ls -l"
+
+.SH AUTHOR
+Written by Sean A. Cardona and Lesty Carrion
+
+.SH REPORTING BUGS
+Report bugs to cardonasean123@gmail.com
+
+.SH COPYRIGHT
+Copyright (C) 2023 HOlberton School
+This is free software; see the source for copying conditions. There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+.SH SEE ALSO
+.BR execve (2), fork (2), wait (2), stat (2), getenv (3), strdup (3), write (2).
+
+.SH NOTES
+This man page is a simplified version. Consult the source code for more details.
+
