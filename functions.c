@@ -1,9 +1,11 @@
 #include "simple_shell.h"
 
+int last_exit_status = 0;
+
 /**
  * command_lists - function that looks for the command path
  * @cmd: command
- * Return: the path
+ * Return: the paths
  */
 char *command_lists(char *cmd)
 {
@@ -13,7 +15,7 @@ char *command_lists(char *cmd)
 	char *new_path = NULL;
 	struct stat buf;
 
-	path = strdup(getenv("PATH")); /* gets a dup of PATH */
+	path = strdup(get_env_variable("PATH")); /* gets a dup of PATH */
 	tokens = strtok(path, ":"); /* split the path in a set of tokens */
 	new_path = malloc(sizeof(char) * 100);
 	if (getenv("PATH")[0] == ':')
@@ -63,8 +65,7 @@ int _printenv(void)
 	{
 		write(file_descr, str, strlen(str));
 		write(file_descr, "\n", 1);
-		str = environ[index]; /*++i without next line */
-		++index;
+		str = environ[++index]; 
 	}
 	return (0);
 }
@@ -81,17 +82,20 @@ int command_read(char *input, size_t __attribute__((unused))characters)
 	char *cmd_arr[100];
 	int index = 0;
 
+	input = trim_spaces(input);
+
+	if (strcmp(input, "") == 0)
+		return (0);
+
 	if (strcmp(input, "exit") == 0)
 	{
-		write(1, "\n Bye and thank you for the use \n\n", 35);
-		return (2);
+		exit(last_exit_status);
 	}
 	if (strcmp(input, "env") == 0)
 		return (_printenv());
 
 	if (input[0] == 32)
 	{
-		input = NULL;
 		return (1);
 	}
 	token = strtok(input, " ");
@@ -114,17 +118,16 @@ int execute(char *cmd_arr[])
 {
 	char *exe_path = NULL, *cmd = NULL;
 	pid_t pid;
-	int status, exit_st = 0;
-
+	int status;
+	
 	cmd = cmd_arr[0];
 	exe_path = command_lists(cmd);
-	if (exe_path == NULL)
+	if ((exe_path == NULL) || access(exe_path, X_OK) == -1)
 	{
 		write(2, cmd, strlen(cmd));
 		write(2, ": command not found\n", 21);
 
-		exit_st = WEXITSTATUS(status);
-		return (exit_st);
+		return (1);
 	}
 	pid = fork();
 	if (pid < 0)
@@ -133,21 +136,54 @@ int execute(char *cmd_arr[])
 		return (-1);
 	}
 	if (pid > 0)
+	{
 		wait(&status);
+	}
 	else if (pid == 0)
 	{
 		if (environ)
 		{
-			(execve(exe_path, cmd_arr, environ));
-			perror("Error:");
-			exit(1);
+			if (execve(exe_path, cmd_arr, environ) == -1)
+			{
+				perror("Error:");
+				exit(1);
+			}
 		}
 		else
 		{
-			execve(exe_path, cmd_arr, NULL);
+			if(execve(exe_path, cmd_arr, NULL) == -1)
+			{
+				perror("Error:");
+				exit(1);
+			}
 		}
 	}
+	if (WIFEXITED(status))
+		last_exit_status = WEXITSTATUS(status);
+
 	free(exe_path);
 	return (0);
 }
 
+char *get_env_variable(const char *name)
+{
+	extern char **environ;
+	int index = 0;
+	char *env_var = NULL;
+
+	while (environ[index] != NULL)
+	{
+		if (strncmp(environ[index], name, strlen(name)) == 0)
+		{
+			env_var = strchr(environ[index], '=');
+			if (env_var != NULL)
+			{
+				env_var++;
+				break;
+			}
+		}
+		index++;
+	}
+
+	return (env_var);
+}

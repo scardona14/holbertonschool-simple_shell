@@ -18,8 +18,8 @@ int main(void)
 	while (1)
 	{
 		if (isatty(STDIN_FILENO) == 1)
-			write(1, "simple_shell>", 13);
-
+			write(1, "$ ", 2);
+			
 		characters = getline(&input, &size, stdin);
 		if (characters == -1)
 		{

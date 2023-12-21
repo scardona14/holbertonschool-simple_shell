@@ -10,16 +10,19 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <dirent.h>
+#include <ctype.h>
 
-#define MAX_INPUT_SIZE 1024
+#define MAX_INPUT_SIZE 100
 
 extern char **environ;
 
-
+char *get_env_variable(const char *name);
 int _printenv(void);
 char *_getenv(char *var);
 char *command_lists(char *cmd);
 int command_read(char *s, size_t __attribute__((unused))file_stream);
 int execute(char *cmd_arr[]);
+char *trim_spaces(char *str);
+int is_space(char c);
 
 #endif /* SIMPLE_SHELL_H */
