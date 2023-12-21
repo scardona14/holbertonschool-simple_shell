@@ -52,12 +52,7 @@ char *command_lists(char *cmd)
 	free(new_path);
 
 	if (stat(cmd, &buf) == 0) /* After PATH checked and cmd is there locally */
-	{
-		char *exit_cmd = strdup(cmd);
-		free(path);
-		free(new_path);
-		return (exit_cmd);
-	}
+		return (strdup(cmd));
 	return (NULL);/* in case of possible errors */
 }
 
