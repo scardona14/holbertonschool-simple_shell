@@ -14,6 +14,7 @@ This consists of interpreting orders. It incorporates features such as process c
 
 Project Information
 
+
 # Tasks
 
 - Task 0. README, man_1_simple_shell, AUTHORS
@@ -36,7 +37,7 @@ All your header files should be include guarded
 This shell should not have any memory leaks
 Unless specified otherwise, your program must have the exact same output as sh (/bin/sh) as well as the exact same error output.
 
-Allowed functions used
+# Allowed functions used
 
 	execve (man 2 execve)
 	exit (man 3 exit)
@@ -53,7 +54,7 @@ Allowed functions used
 	wait (man 2 wait)
 	write (man 2 write)
 
-	Documentation
+# Documentation
  
 	Installation:
  
@@ -63,7 +64,7 @@ Allowed functions used
 	Run the shell in interactive mode: ./hsh
 	Or run the shell in non-interactive mode: example echo "Hello world!" | ./hsh
 
-	Testing:
+# Testing:
  
 	First compile and then run the executable file on your terminal For compile see Installation section
 
@@ -86,7 +87,7 @@ Allowed functions used
 	-rw-r--r-- 1 root root 7134 Dec  6 08:34 README.md
 	-rw-r--r-- 1 root root  824 Dec  6 08:39 shell.h
 	
-	Authors:
+# Authors:
 
 	Sean A. Cardona
 	Lesty Carrion

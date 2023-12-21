@@ -19,9 +19,12 @@ char *command_lists(char *cmd)
 	tokens = strtok(path, ":"); /* split the path in a set of tokens */
 	new_path = malloc(sizeof(char) * 100);
 	if (getenv("PATH")[0] == ':')
-		if (stat(cmd, &buf) == 0) /* in case of success */
+		if (stat(cmd, &buf) == 0)/* in case of success */
+		{ 
+		 	free(new_path);
+			free(path);
 			return (strdup(cmd)); /* return a copy of command */
-
+		}	
 	while (tokens != NULL)
 	{
 		path_array[index] = tokens; /* store results of tokens in path_array */
@@ -37,8 +40,10 @@ char *command_lists(char *cmd)
 		strcat(new_path, "\0");
 		if (stat(new_path, &buf) == 0) /* if sucess, free and return new_path */
 		{
+			char *exit_path = strdup(new_path);
+			free(new_path);
 			free(path);
-			return (new_path);
+			return (exit_path);
 		}
 		else
 			new_path[0] = 0;
@@ -47,7 +52,12 @@ char *command_lists(char *cmd)
 	free(new_path);
 
 	if (stat(cmd, &buf) == 0) /* After PATH checked and cmd is there locally */
-		return (strdup(cmd));
+	{
+		char *exit_cmd = strdup(cmd);
+		free(path);
+		free(new_path);
+		return (exit_cmd);
+	}
 	return (NULL);/* in case of possible errors */
 }
 
