@@ -1,11 +1,7 @@
 Simple Shell
 Release date December 22, 2023
 
-<<<<<<< HEAD
-Introduction
-=======
-	Introduction
->>>>>>> befa065 (readme commit)
+# Introduction
 
 What is Shell?
 
@@ -14,13 +10,10 @@ A shell is a command-line interpreter, it is the computer program that provides 
 What is it for?
 
 This consists of interpreting orders. It incorporates features such as process control, input/output redirection, law listing and reading, protection, communications, and a command language for writing batch programs or scripts. All Unix-type systems have at least one interpreter compatible with the Bourne shell. The Bourne shell program is found within the Unix file hierarchy at /bin/sh.
-Project Information
-<<<<<<< HEAD
-Tasks
-=======
 
-Tasks:
->>>>>>> befa065 (readme commit)
+Project Information
+
+# Tasks
 
 Task 0. README, man_1_simple_shell, AUTHORS
 Task 1. Betty would be proud
@@ -31,11 +24,7 @@ Task 5. Simple shell 0.4
 Task 6. Simple shell 1.0
 Task 7. What happens when you type ls -l in the shell
 
-<<<<<<< HEAD
-General requirements
-=======
 General requirements:
->>>>>>> befa065 (readme commit)
 
 Allowed editors: vi, vim, emacs
 All your files will be compiled on Ubuntu 14.04 LTS
