@@ -1,4 +1,4 @@
-Simple Shell
+# Simple Shell
 Release date December 22, 2023
 
 # Introduction
@@ -14,7 +14,6 @@ This consists of interpreting orders. It incorporates features such as process c
 Project Information
 
 # Tasks
-
 Task 0. README, man_1_simple_shell, AUTHORS
 Task 1. Betty would be proud
 Task 2. Simple shell 0.1
