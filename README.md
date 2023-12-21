@@ -87,4 +87,3 @@ Unless specified otherwise, your program must have the exact same output as sh (
 
 	Sean A. Cardona
 	Lesty Carrion
-
