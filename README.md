@@ -1,7 +1,7 @@
-Simple Shell
-Release date December 22, 2023
+# Simple Shell
+## Release date December 22, 2023
 
-Introduction
+# Introduction
 
 What is Shell?
 
