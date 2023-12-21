@@ -1,7 +1,8 @@
-Simple Shell
+# Simple Shell
+
 Release date December 22, 2023
 
-Introduction
+# Introduction
 
 What is Shell?
 
@@ -10,19 +11,22 @@ A shell is a command-line interpreter, it is the computer program that provides 
 What is it for?
 
 This consists of interpreting orders. It incorporates features such as process control, input/output redirection, law listing and reading, protection, communications, and a command language for writing batch programs or scripts. All Unix-type systems have at least one interpreter compatible with the Bourne shell. The Bourne shell program is found within the Unix file hierarchy at /bin/sh.
+
 Project Information
-Tasks
 
-Task 0. README, man_1_simple_shell, AUTHORS
-Task 1. Betty would be proud
-Task 2. Simple shell 0.1
-Task 3. Simple shell 0.2
-Task 4. Simple shell 0.3
-Task 5. Simple shell 0.4
-Task 6. Simple shell 1.0
-Task 7. What happens when you type ls -l in the shell
 
-General requirements
+# Tasks
+
+- Task 0. README, man_1_simple_shell, AUTHORS
+- Task 1. Betty would be proud
+- Task 2. Simple shell 0.1
+- Task 3. Simple shell 0.2
+- Task 4. Simple shell 0.3
+- Task 5. Simple shell 0.4
+- Task 6. Simple shell 1.0
+- Task 7. What happens when you type ls -l in the shell
+
+General requirements:
 
 Allowed editors: vi, vim, emacs
 All your files will be compiled on Ubuntu 14.04 LTS
@@ -33,7 +37,7 @@ All your header files should be include guarded
 This shell should not have any memory leaks
 Unless specified otherwise, your program must have the exact same output as sh (/bin/sh) as well as the exact same error output.
 
-Allowed functions used
+# Allowed functions used
 
 	execve (man 2 execve)
 	exit (man 3 exit)
@@ -50,7 +54,7 @@ Allowed functions used
 	wait (man 2 wait)
 	write (man 2 write)
 
-	Documentation
+# Documentation
  
 	Installation:
  
@@ -60,7 +64,7 @@ Allowed functions used
 	Run the shell in interactive mode: ./hsh
 	Or run the shell in non-interactive mode: example echo "Hello world!" | ./hsh
 
-	Testing:
+# Testing:
  
 	First compile and then run the executable file on your terminal For compile see Installation section
 
@@ -83,7 +87,7 @@ Allowed functions used
 	-rw-r--r-- 1 root root 7134 Dec  6 08:34 README.md
 	-rw-r--r-- 1 root root  824 Dec  6 08:39 shell.h
 	
-	Authors:
+# Authors:
 
 	Sean A. Cardona
 	Lesty Carrion
