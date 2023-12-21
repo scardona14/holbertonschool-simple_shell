@@ -2,13 +2,17 @@ Simple Shell
 Release date December 22, 2023
 
 Introduction
-What is Shell
+
+What is Shell?
+
 A shell is a command-line interpreter, it is the computer program that provides a user interface to access the services of the operating system. Depending on the type of interface they use, shells can be of various types, in this case, a shell program of the type sh (Bourne Shell) will be developed. Users typically interact with a shell using a terminal emulator that is used for entering data into and displaying or printing data from, a computer or a computing system.
 
-What is it for
+What is it for?
+
 This consists of interpreting orders. It incorporates features such as process control, input/output redirection, law listing and reading, protection, communications, and a command language for writing batch programs or scripts. All Unix-type systems have at least one interpreter compatible with the Bourne shell. The Bourne shell program is found within the Unix file hierarchy at /bin/sh.
 Project Information
 Tasks
+
 Task 0. README, man_1_simple_shell, AUTHORS
 Task 1. Betty would be proud
 Task 2. Simple shell 0.1
@@ -19,6 +23,7 @@ Task 6. Simple shell 1.0
 Task 7. What happens when you type ls -l in the shell
 
 General requirements
+
 Allowed editors: vi, vim, emacs
 All your files will be compiled on Ubuntu 14.04 LTS
 Your C programs and functions will be compiled with gcc 4.8.4 using the flags -Wall -Werror -Wextra and -pedantic
@@ -43,17 +48,20 @@ Allowed functions used
 	stat (__ xstat) (man 2 stat)
 	strtok (man 3 strtok)
 	wait (man 2 wait)
-write (man 2 write)
+	write (man 2 write)
 
 	Documentation
-	Installation
+ 
+	Installation:
+ 
 	Clone this repository: git clone "https://github.com/Ouyei/simple_shell"
 	Change directories into the repository: cd simple_shell
 	Compile: gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
 	Run the shell in interactive mode: ./hsh
 	Or run the shell in non-interactive mode: example echo "Hello world!" | ./hsh
 
-	Testing
+	Testing:
+ 
 	First compile and then run the executable file on your terminal For compile see Installation section
 
 	$ ./hsh
@@ -75,7 +83,7 @@ write (man 2 write)
 	-rw-r--r-- 1 root root 7134 Dec  6 08:34 README.md
 	-rw-r--r-- 1 root root  824 Dec  6 08:39 shell.h
 	
-	Authors
+	Authors:
 
 	Sean A. Cardona
 	Lesty Carrion
