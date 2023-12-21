@@ -2,5 +2,6 @@
     "vscode-pets.petType": "totoro",
     "vscode-pets.petSize": "small",
     "vscode-pets.theme": "forest",
-    "vscode-pets.throwBallWithMouse": false
+    "vscode-pets.throwBallWithMouse": false,
+    "workbench.colorTheme": "Red"
 }
