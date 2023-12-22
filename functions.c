@@ -34,12 +34,6 @@ char *command_lists(char *cmd)
 	path_array[index] = NULL;
 	for (index = 0; path_array[index]; index++)
 	{
-		size_t len = strlen(path_array[index]) + strlen(cmd) + 2;
-		if (len > 140)
-		{
-			free(new_path);
-			new_path = malloc(sizeof(char) * len);
-		}
 		strcpy(new_path, path_array[index]); /* copy tokens to new path */
 		strcat(new_path, "/"); /* add "/" and command */
 		strcat(new_path, cmd);
