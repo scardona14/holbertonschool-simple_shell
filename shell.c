@@ -14,6 +14,7 @@ int main(void)
 	int status = 0;
 	int exitst = 0;
 
+keep_one_env_variable("PATH");
 
 	while (1)
 	{

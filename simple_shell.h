@@ -25,5 +25,6 @@ int execute(char *cmd_arr[]);
 char *trim_spaces(char *str);
 int is_space(char c);
 void set_new_env_variable(const char *name, const char *value);
+void keep_one_env_variable(const char *keep);
 
 #endif /* SIMPLE_SHELL_H */
