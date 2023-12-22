@@ -34,6 +34,12 @@ char *command_lists(char *cmd)
 	path_array[index] = NULL;
 	for (index = 0; path_array[index]; index++)
 	{
+		size_t len = strlen(path_array[index]) + strlen(cmd) + 2;
+		if (len > 100)
+		{
+			free(new_path);
+			new_path = malloc(sizeof(char) * len);
+		}
 		strcpy(new_path, path_array[index]); /* copy tokens to new path */
 		strcat(new_path, "/"); /* add "/" and command */
 		strcat(new_path, cmd);
@@ -44,6 +50,7 @@ char *command_lists(char *cmd)
 			free(new_path);
 			free(path);
 			return (exit_path);
+			free(strdup(new_path));
 		}
 		else
 			new_path[0] = 0;
@@ -53,12 +60,11 @@ char *command_lists(char *cmd)
 
 	if (stat(cmd, &buf) == 0) /* After PATH checked and cmd is there locally */
 	{
-		char *exit_cmd = strdup(cmd);
-		free(path);
-		free(new_path);
-		return (exit_cmd);
+		return (strdup(cmd));
+		free(strdup(cmd));
 	}
 	return (NULL);/* in case of possible errors */
+	free(strdup(cmd));
 }
 
 /**
@@ -136,13 +142,14 @@ int execute(char *cmd_arr[])
 	{
 		write(2, cmd, strlen(cmd));
 		write(2, ": command not found\n", 21);
-
+		free(exe_path);
 		return (1);
 	}
 	pid = fork();
 	if (pid < 0)
 	{
 		perror("Error:");
+		free(exe_path);
 		return (-1);
 	}
 	if (pid > 0)
@@ -156,7 +163,7 @@ int execute(char *cmd_arr[])
 			if (execve(exe_path, cmd_arr, environ) == -1)
 			{
 				perror("Error:");
-				exit(1);
+				_exit(1);
 			}
 		}
 		else
@@ -164,7 +171,7 @@ int execute(char *cmd_arr[])
 			if(execve(exe_path, cmd_arr, NULL) == -1)
 			{
 				perror("Error:");
-				exit(1);
+				_exit(1);
 			}
 		}
 	}
