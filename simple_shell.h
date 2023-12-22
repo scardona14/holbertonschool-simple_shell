@@ -12,7 +12,7 @@
 #include <dirent.h>
 #include <ctype.h>
 
-#define MAX_INPUT_SIZE 100
+#define MAX_INPUT_SIZE 140
 
 extern char **environ;
 
@@ -24,5 +24,6 @@ int command_read(char *s, size_t __attribute__((unused))file_stream);
 int execute(char *cmd_arr[]);
 char *trim_spaces(char *str);
 int is_space(char c);
+void set_new_env_variable(const char *name, const char *value);
 
 #endif /* SIMPLE_SHELL_H */

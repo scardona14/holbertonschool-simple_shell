@@ -11,13 +11,13 @@ char *command_lists(char *cmd)
 {
 	int index = 0;
 	char *path, *tokens;
-	char *path_array[100];
+	char *path_array[140];
 	char *new_path = NULL;
 	struct stat buf;
 
 	path = strdup(get_env_variable("PATH")); /* gets a dup of PATH */
 	tokens = strtok(path, ":"); /* split the path in a set of tokens */
-	new_path = malloc(sizeof(char) * 100);
+	new_path = malloc(sizeof(char) * 140);
 	if (getenv("PATH")[0] == ':')
 		if (stat(cmd, &buf) == 0)/* in case of success */
 		{ 
@@ -34,6 +34,12 @@ char *command_lists(char *cmd)
 	path_array[index] = NULL;
 	for (index = 0; path_array[index]; index++)
 	{
+		size_t len = strlen(path_array[index]) + strlen(cmd) + 2;
+		if (len > 140)
+		{
+			free(new_path);
+			new_path = malloc(sizeof(char) * len);
+		}
 		strcpy(new_path, path_array[index]); /* copy tokens to new path */
 		strcat(new_path, "/"); /* add "/" and command */
 		strcat(new_path, cmd);
@@ -44,6 +50,7 @@ char *command_lists(char *cmd)
 			free(new_path);
 			free(path);
 			return (exit_path);
+			free(strdup(new_path));
 		}
 		else
 			new_path[0] = 0;
@@ -52,8 +59,12 @@ char *command_lists(char *cmd)
 	free(new_path);
 
 	if (stat(cmd, &buf) == 0) /* After PATH checked and cmd is there locally */
+	{
 		return (strdup(cmd));
+		free(strdup(cmd));
+	}
 	return (NULL);/* in case of possible errors */
+	free(strdup(cmd));
 }
 
 /**
@@ -131,13 +142,14 @@ int execute(char *cmd_arr[])
 	{
 		write(2, cmd, strlen(cmd));
 		write(2, ": command not found\n", 21);
-
+		free(exe_path);
 		return (1);
 	}
 	pid = fork();
 	if (pid < 0)
 	{
 		perror("Error:");
+		free(exe_path);
 		return (-1);
 	}
 	if (pid > 0)
@@ -146,12 +158,13 @@ int execute(char *cmd_arr[])
 	}
 	else if (pid == 0)
 	{
+		set_new_env_variable("NEW_VARIABLE", "value");
 		if (environ)
 		{
 			if (execve(exe_path, cmd_arr, environ) == -1)
 			{
 				perror("Error:");
-				exit(1);
+				_exit(1);
 			}
 		}
 		else
@@ -159,7 +172,7 @@ int execute(char *cmd_arr[])
 			if(execve(exe_path, cmd_arr, NULL) == -1)
 			{
 				perror("Error:");
-				exit(1);
+				_exit(1);
 			}
 		}
 	}
