@@ -12,7 +12,7 @@
 #include <dirent.h>
 #include <ctype.h>
 
-#define MAX_INPUT_SIZE 140
+#define MAX_INPUT_SIZE 100
 
 extern char **environ;
 

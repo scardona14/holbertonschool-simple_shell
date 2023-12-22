@@ -11,13 +11,13 @@ char *command_lists(char *cmd)
 {
 	int index = 0;
 	char *path, *tokens;
-	char *path_array[140];
+	char *path_array[100];
 	char *new_path = NULL;
 	struct stat buf;
 
 	path = strdup(get_env_variable("PATH")); /* gets a dup of PATH */
 	tokens = strtok(path, ":"); /* split the path in a set of tokens */
-	new_path = malloc(sizeof(char) * 140);
+	new_path = malloc(sizeof(char) * 100);
 	if (getenv("PATH")[0] == ':')
 		if (stat(cmd, &buf) == 0)/* in case of success */
 		{ 
@@ -34,6 +34,12 @@ char *command_lists(char *cmd)
 	path_array[index] = NULL;
 	for (index = 0; path_array[index]; index++)
 	{
+		size_t len = strlen(path_array[index]) + strlen(cmd) + 2;
+		if (len > 100)
+		{
+			free(new_path);
+			new_path = malloc(sizeof(char) * len);
+		}
 		strcpy(new_path, path_array[index]); /* copy tokens to new path */
 		strcat(new_path, "/"); /* add "/" and command */
 		strcat(new_path, cmd);
@@ -152,7 +158,6 @@ int execute(char *cmd_arr[])
 	}
 	else if (pid == 0)
 	{
-		set_new_env_variable("NEW_VARIABLE", "value");
 		if (environ)
 		{
 			if (execve(exe_path, cmd_arr, environ) == -1)
